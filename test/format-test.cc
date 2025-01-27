@@ -1068,7 +1068,8 @@ TEST(format_test, precision) {
   EXPECT_EQ(fmt::format("{:#.0f}", 123.0), "123.");
   EXPECT_EQ(fmt::format("{:.02f}", 1.234), "1.23");
   EXPECT_EQ(fmt::format("{:.1g}", 0.001), "0.001");
-  EXPECT_EQ(fmt::format("{}", 1019666432.0f), "1019666400");
+  EXPECT_EQ(fmt::format("{}", 123456789.0f), "1.2345679e+08");
+  EXPECT_EQ(fmt::format("{}", 1019666432.0f), "1.0196664e+09");
   EXPECT_EQ(fmt::format("{:.0e}", 9.5), "1e+01");
   EXPECT_EQ(fmt::format("{:.1e}", 1e-34), "1.0e-34");
 
@@ -2102,6 +2103,10 @@ TEST(format_test, output_iterators) {
   std::stringstream s;
   fmt::format_to(std::ostream_iterator<char>(s), "{}", 42);
   EXPECT_EQ("42", s.str());
+
+  std::stringstream s2;
+  fmt::format_to(std::ostreambuf_iterator<char>(s2), "{}.{:06d}", 42, 43);
+  EXPECT_EQ("42.000043", s2.str());
 }
 
 TEST(format_test, fill_via_appender) {
