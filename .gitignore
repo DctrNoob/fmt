@@ -4,6 +4,7 @@
 *~
 .DS_Store
 .vscode/
+.vs/
 /CMakeScripts
 /Testing
 /_CPack_Packages
