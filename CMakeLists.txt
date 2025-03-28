@@ -164,6 +164,7 @@ option(FMT_WERROR "Halt the compilation with an error on compiler warnings."
 
 # Options that control generation of various targets.
 option(FMT_DOC "Generate the doc target." ${FMT_MASTER_PROJECT})
+option(FMT_EXCEPTIONS "Build with exceptions." ON)
 option(FMT_INSTALL "Generate the install target." ON)
 option(FMT_TEST "Generate the test target." ${FMT_MASTER_PROJECT})
 option(FMT_FUZZ "Generate the fuzz target." OFF)
@@ -323,6 +324,11 @@ endif ()
 if (FMT_PEDANTIC)
   target_compile_options(fmt PRIVATE ${PEDANTIC_COMPILE_FLAGS})
 endif ()
+if (FMT_EXCEPTIONS)
+  target_compile_options(fmt PRIVATE "-DFMT_USE_EXCEPTIONS=1")
+else()
+  target_compile_options(fmt PRIVATE "-DFMT_USE_EXCEPTIONS=0")
+endif()
 
 if (cxx_std_11 IN_LIST CMAKE_CXX_COMPILE_FEATURES)
   target_compile_features(fmt PUBLIC cxx_std_11)
