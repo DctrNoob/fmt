@@ -4,12 +4,14 @@
 *~
 .DS_Store
 .vscode/
+.cache/
 .vs/
 /CMakeScripts
 /Testing
 /_CPack_Packages
 /install_manifest.txt
 CMakeCache.txt
+CMakeUserPresets.json
 CMakeFiles
 CPack*.cmake
 CTestTestfile.cmake
