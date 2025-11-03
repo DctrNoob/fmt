@@ -23,6 +23,7 @@
 #else
 #  define FMT_LIFETIMEBOUND
 #endif
+FMT_PRAGMA_CLANG(diagnostic error "-Wreturn-stack-address")
 
 FMT_BEGIN_NAMESPACE
 
@@ -239,14 +240,6 @@ using range_reference_type =
 // reference type, with cv-ref stripped.
 template <typename Range>
 using uncvref_type = remove_cvref_t<range_reference_type<Range>>;
-
-template <typename Formatter>
-FMT_CONSTEXPR auto maybe_set_debug_format(Formatter& f, bool set)
-    -> decltype(f.set_debug_format(set)) {
-  f.set_debug_format(set);
-}
-template <typename Formatter>
-FMT_CONSTEXPR void maybe_set_debug_format(Formatter&, ...) {}
 
 template <typename T>
 struct range_format_kind_
